@@ -12,6 +12,7 @@ import org.hibernate.jpa.AvailableSettings.JDBC_URL
 import org.hibernate.jpa.HibernatePersistenceProvider
 import javax.persistence.EntityTransaction
 import javax.persistence.NoResultException
+import javax.persistence.Query
 import javax.persistence.TypedQuery
 
 
@@ -56,18 +57,15 @@ object EventManager {
         return e
     }
 
-    fun toggle(id: Int, enabled: Boolean): Event? {
+    fun toggle(id: Int, enabled: Boolean) {
         val em = EventPlugin.instance.entityManagerFactory.createEntityManager()
         em.transaction.begin();
 
-        val query = "SELECT e FROM Event e WHERE e.id = :id"
-        val tq: TypedQuery<Event> = em.createQuery(query, Event::class.java)
+        val query = "UPDATE Event e SET enabled=:enabled WHERE e.id = :id"
+        val tq: Query = em.createQuery(query)
         tq.setParameter("id", id)
-        var e: Event? = null
+        tq.setParameter("enabled", enabled)
         try {
-            e = tq.singleResult
-            e.enabled = enabled
-            em.persist(e)
             tq.executeUpdate()
             em.transaction.commit()
         } catch (e: NoResultException) {
@@ -76,7 +74,6 @@ object EventManager {
         } finally {
             em.close()
         }
-        return e
     }
 
 
