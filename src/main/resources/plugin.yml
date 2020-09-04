@@ -1,0 +1,11 @@
+name: uwu-events
+main: dev.throwouterror.bukkit.uwu.events.core.EventPlugin
+version: 1.0.0
+description: A utility plugin made by Creepinson specifically for the Goofin Network..
+commands:
+  event:
+    description: UwU events command
+permissions:
+  uwu.event.admin:
+    description: allows players with this permission to configure events completely (create, start, stop, etc.)
+    default: op

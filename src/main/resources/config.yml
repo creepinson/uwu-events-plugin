@@ -1,0 +1,28 @@
+# Database
+database:
+  driver: "com.mysql.jdbc.Driver"
+  dialect: "org.hibernate.dialect.MySQLDialect"
+  host: "localhost:3306"
+  name: "minecraft"
+  user: "root"
+  password: "password"
+
+# Event Configuration
+events:
+  # How long to wait for players to join. (Must be an integer).
+  # The plugin will start counting down from 60 and then 45, 30, etc.
+  time-to-start: 45
+
+  # What will come up when you use /event
+  starting:
+    - '&7&m------------------------&bEvent&7&m------------------------'
+    - ' '
+    - '&7Event: &c{EVENT} &2| &7Host: &a{PLAYER} &2| &7Type &e/event join &7to join!'
+    - ' '
+    - '&7&m-----------------------------------------------------'
+
+  # The spectate item that someone gets when they go in spectate mode.
+  spectate-item: "264:0"
+
+  # Name of the spectate item.
+  spectate-item-name: "&b&lRight Click To Quit"
